@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="#f000"
+            android:textSize="17sp"
+            android:id="@+id/playnhacindex"
+            android:text="1"
+
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:singleLine="true"
+            android:layout_toRightOf="@id/playnhacindex"
+            android:id="@+id/tenbaihatplaynhac"
+            android:text="ca khuc"
+            android:maxWidth="250dp"
+            android:ellipsize="end"
+            android:textSize="17sp"
+            android:layout_marginLeft="10dp"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="#f000"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:singleLine="true"
+            android:layout_toRightOf="@id/playnhacindex"
+            android:layout_below="@id/tenbaihatplaynhac"
+            android:id="@+id/tencasibaihatplaynhac"
+            android:text="ca si"
+            android:textSize="14sp"
+            android:maxWidth="250dp"
+            android:ellipsize="end"
+            android:layout_marginLeft="10dp"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"/>
+    </RelativeLayout>
+
+</RelativeLayout>

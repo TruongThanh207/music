@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <TextView
+        android:text="Top 100"
+        android:textSize="30sp"
+        android:textColor="#000"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/textviewplaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/listviewplaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textviewplaylist"/>
+
+
+    <TextView
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/iconmoreplaylist"
+        android:background="#B84151"
+        android:layout_below="@id/listviewplaylist"
+        android:text="Xem Thêm Playlist"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:paddingTop="10dp"
+        android:drawablePadding="15dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/textmoreplaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
