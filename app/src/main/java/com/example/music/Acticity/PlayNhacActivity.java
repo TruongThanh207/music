@@ -71,12 +71,13 @@ public class PlayNhacActivity extends AppCompatActivity {
 
     private void Getintent() {
         Intent intent = getIntent();
+
         mangbaihat.clear();
         if(intent!=null){
             if (intent.hasExtra("bainhac")) {
                 BaiHat baiHat = intent.getParcelableExtra("bainhac");
                 mangbaihat.add(baiHat);
-                Toast.makeText(this, baiHat.getTenBaiHat(), Toast.LENGTH_SHORT).show();
+
             }
             if (intent.hasExtra("cacbainhac")) {
                 ArrayList<BaiHat> arrayListExtra = intent.getParcelableArrayListExtra("cacbainhac");
@@ -221,6 +222,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                         new playnhac().execute(mangbaihat.get(position).getLinkBaiHat());
                         fragment_disk.Playnhac(mangbaihat.get(position).getHinhBaiHat());
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                        UpdateTime();
                     }
                 }
 
@@ -264,6 +266,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                         new playnhac().execute(mangbaihat.get(position).getLinkBaiHat());
                         fragment_disk.Playnhac(mangbaihat.get(position).getHinhBaiHat());
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                        UpdateTime();
                     }
                 }
 
@@ -340,6 +343,7 @@ public class PlayNhacActivity extends AppCompatActivity {
             }
             mediaPlayer.start();
             TimeSong();
+            UpdateTime();
         }
     }
 
@@ -349,6 +353,70 @@ public class PlayNhacActivity extends AppCompatActivity {
         seekBar.setMax(mediaPlayer.getDuration());
     }
     private void UpdateTime(){
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if( mediaPlayer!=null)
+                {
+                    seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+                    timesong.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
+                    handler.postDelayed(this, 300);
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            next = true;
+                        }
+                    });
 
+                }
+            }
+        }, 300);
+        final Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(next == true)
+                {
+                    if (position<mangbaihat.size())
+                    {
+                        imgplay.setImageResource(R.drawable.iconpause);
+                        position++;
+                        if(repeat)
+                        {
+                            if(position==0){
+                                position= mangbaihat.size();
+                            }
+                            position -=1;
+                        }
+                        if(suff)
+                        {
+                            Random random= new Random();
+                            int index = random.nextInt(mangbaihat.size());
+                            if(index==position)
+                            {
+                                position = index-1;
+                            }
+                            position = index;
+                        }
+                        if(position>mangbaihat.size()-1)
+                        {
+                            position=0;
+                        }
+                        new playnhac().execute(mangbaihat.get(position).getLinkBaiHat());
+                        fragment_disk.Playnhac(mangbaihat.get(position).getHinhBaiHat());
+                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                    }
+                    next = false;
+                    handler1.removeCallbacks(this);
+                }
+
+                else
+                {
+                    handler1.postDelayed(this, 300);
+                }
+            }
+        },0);
     }
 }

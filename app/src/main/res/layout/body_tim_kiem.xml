@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgtimkiembaihat"
+            android:scaleType="fitXY"
+            android:layout_margin="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+        <TextView
+            android:text="Ten bai hat"
+            android:maxLines="1"
+            android:textColor="#f000"
+            android:ellipsize="end"
+            android:textSize="20sp"
+            android:layout_toRightOf="@id/imgtimkiembaihat"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/tenbaihattimkiem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tencasitimkiem"
+            android:layout_below="@id/tenbaihattimkiem"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/imgtimkiembaihat"
+            android:maxLines="1"
+            android:text="Ca si"
+            android:textSize="15sp"
+            android:textColor="#969090"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+</RelativeLayout>

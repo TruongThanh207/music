@@ -37,7 +37,7 @@ public class PlayNhacAdapter extends RecyclerView.Adapter<PlayNhacAdapter.ViewHo
         BaiHat baiHat = mangbaihat.get(position);
         holder.tenbaihat.setText(baiHat.getTenBaiHat());
         holder.tencasi.setText(baiHat.getCaSi());
-        holder.index.setText(position + 1 + "");
+        holder.index.setText(position + 1 + ".");
     }
 
     @Override

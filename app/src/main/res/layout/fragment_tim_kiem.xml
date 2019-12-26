@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayouttimkiem"
+        android:background="#f11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:id="@+id/toolbartimkiem"
+            android:layout_height="?attr/actionBarSize"/>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recyctimkiem"
+        android:layout_below="@id/appbarlayouttimkiem"
+        android:layout_height="match_parent">
 
-</LinearLayout>
+    </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="30sp"
+        android:id="@+id/txtkhongcodulieu"
+        android:gravity="center"
+        android:text="KHÔNG CÓ DỮ LIỆU"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

@@ -271,7 +271,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DanhSachBaiHatActivity.this, PlayNhacActivity.class);
-                intent.putExtra("cacbaihat", arrayBaihat);
+                intent.putExtra("cacbainhac", arrayBaihat);
                 startActivity(intent);
             }
         });
