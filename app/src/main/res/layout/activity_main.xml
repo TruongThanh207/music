@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f000"
     android:orientation="vertical"
     tools:context=".Acticity.MainActivity">
 
@@ -20,7 +21,8 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="#B40000"
         app:tabTextColor="#000000"
-        app:tabIndicatorHeight="2dp"
-        android:background="@android:color/transparent" />
+        app:tabIndicatorHeight="1dp"
+        app:tabBackground="@drawable/sel_tab_layout"
+         />
 
 </LinearLayout>

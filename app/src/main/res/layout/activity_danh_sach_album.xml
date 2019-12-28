@@ -5,10 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/black"
     tools:context=".Acticity.DanhSachAlbumActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbaralbum"
         android:layout_width="match_parent"
+        android:background="@android:color/transparent"
+        android:theme="@style/Theme.AppCompat"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_height="?attr/actionBarSize"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleviewalbumall"

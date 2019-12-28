@@ -10,7 +10,7 @@
     <TextView
         android:text="Ten bai hat"
         android:maxLines="1"
-        android:textColor="#f000"
+        android:textColor="#FFFFFF"
         android:ellipsize="end"
         android:textSize="18sp"
         android:layout_toRightOf="@id/imgbaihathot"

@@ -68,7 +68,7 @@ public class DanhSachCacPlaylistActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setTitle("PlayLists");
-        toolbar.setTitleTextColor(Color.BLACK);
+
 
     }
 }

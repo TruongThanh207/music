@@ -6,7 +6,7 @@
     <TextView
         android:text="Top 100"
         android:textSize="30sp"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -28,7 +28,7 @@
         android:layout_below="@id/listviewplaylist"
         android:text="Xem Thêm Playlist"
         android:textSize="20sp"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:paddingTop="10dp"
         android:drawablePadding="15dp"
         android:paddingBottom="10dp"

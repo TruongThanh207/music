@@ -27,15 +27,10 @@ public class MainViewAdapter extends FragmentPagerAdapter {
         return arrayFragment.size();
     }
 
-    public void addFragment(Fragment fragment, String title)
+    public void addFragment(Fragment fragment)
     {
         arrayFragment.add(fragment);
-        arrayTitle.add(title);
-    }
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return arrayTitle.get(position);
+
     }
 
 

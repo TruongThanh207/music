@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         MainViewAdapter mainViewAdapter= new MainViewAdapter(getSupportFragmentManager());
-        mainViewAdapter.addFragment(new Fragment_trang_chu(), "Trang Chu");
-        mainViewAdapter.addFragment(new Fragment_tim_kiem(), "Tim Kiem");
+        mainViewAdapter.addFragment(new Fragment_trang_chu());
+        mainViewAdapter.addFragment(new Fragment_tim_kiem());
         viewPager.setAdapter(mainViewAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.icontrangchu);
-        tabLayout.getTabAt(1).setIcon(R.drawable.iconsearch);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ichomewhite);
+        tabLayout.getTabAt(1).setIcon(R.drawable.icsearh);
     }
 }

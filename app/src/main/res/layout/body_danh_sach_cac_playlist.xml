@@ -26,6 +26,7 @@
         android:layout_gravity="left"
         android:maxWidth="200dp"
         android:padding="5dp"
+        android:textColor="#FFFF"
         android:textSize="15sp"
         android:text="Nhac Viet Hay Nhat"
         android:layout_width="wrap_content"

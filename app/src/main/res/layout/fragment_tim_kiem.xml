@@ -4,12 +4,13 @@
     android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayouttimkiem"
-        android:background="#f11"
+        android:background="#167A50"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:id="@+id/toolbartimkiem"
+            android:layout_marginRight="10dp"
             android:layout_height="?attr/actionBarSize"/>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.recyclerview.widget.RecyclerView
@@ -21,9 +22,13 @@
     </androidx.recyclerview.widget.RecyclerView>
     <TextView
         android:layout_width="match_parent"
-        android:textSize="30sp"
+        android:textSize="17sp"
         android:id="@+id/txtkhongcodulieu"
         android:gravity="center"
-        android:text="KHÔNG CÓ DỮ LIỆU"
-        android:layout_height="match_parent"/>
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/appbarlayouttimkiem"
+        android:text="Không có bài hát"
+        android:layout_height="wrap_content"/>
+
 </RelativeLayout>

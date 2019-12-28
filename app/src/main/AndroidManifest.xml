@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Acticity.PlayNhacActivity"></activity>
+        <activity android:name=".Acticity.MainActivity"></activity>
+        <activity android:name=".Acticity.PlayNhacActivity" />
         <activity android:name=".Acticity.DanhSachAlbumActivity" />
         <activity android:name=".Acticity.DanhSachTheLoaiActivity" />
         <activity android:name=".Acticity.DanhSachChuDeActivity" />
         <activity android:name=".Acticity.DanhSachCacPlaylistActivity" />
         <activity android:name=".Acticity.DanhSachBaiHatActivity" />
-        <activity android:name=".Acticity.MainActivity">
+        <activity android:name=".Acticity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

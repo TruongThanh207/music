@@ -1,5 +1,6 @@
 package com.example.music.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,7 +58,23 @@ public class Fragment_tim_kiem extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.timkiem_view, menu);
         MenuItem menuItem = menu.findItem(R.id.menutimkiem);
-        SearchView searchView = (SearchView) menuItem.getActionView();
+        final SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setBackgroundColor(Color.WHITE);
+                searchView.setQueryHint("Search");
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                searchView.setBackgroundColor(Color.TRANSPARENT);
+                return false;
+            }
+        });
+
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -68,8 +85,9 @@ public class Fragment_tim_kiem extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                GetDataSearch(newText);
 
-                return false;
+                return true;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);

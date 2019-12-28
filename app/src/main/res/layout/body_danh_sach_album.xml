@@ -24,6 +24,7 @@
         android:maxWidth="200dp"
         android:textSize="15sp"
         android:padding="5dp"
+        android:textColor="#FFFF"
         android:text="Nhac Viet Hay Nhat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -32,6 +33,7 @@
         android:text="VA"
         android:textSize="13sp"
         android:padding="7dp"
+        android:textColor="#FFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>

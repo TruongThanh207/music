@@ -12,41 +12,50 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.example.music.Adapter.ViewpagerPlay;
+import com.example.music.Adapter.PlayNhacAdapter;
 import com.example.music.Adapter.ViewpagerPlay;
 import com.example.music.Fragment.Fragment_Disk;
 import com.example.music.Fragment.Fragment_play_baihat;
 import com.example.music.Model.BaiHat;
 import com.example.music.R;
+import com.google.android.material.shape.MaterialShapeDrawable;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PlayNhacActivity extends AppCompatActivity {
+public class PlayNhacActivity extends AppCompatActivity  {
 
     Toolbar toolbarplaynhac;
-    TextView timesong, totaltimesong;
+    TextView timesong, totaltimesong, tencasi, tenbaihat;
     SeekBar seekBar;
-    ImageButton imgplay, imgpre, imgsuf, imgrepeat, imgnext;
+    ImageButton imgplay, imgpre,  imgnext,imgsuf, imgrepeat;
+
     ViewPager viewPagerplaynhac;
     Fragment_Disk fragment_disk;
     Fragment_play_baihat fragment_play_baihat;
     MediaPlayer mediaPlayer;
+
     int position = 0;
 
 
     boolean repeat = false;
     boolean suff = false;
     boolean next = false;
+
+    public static PlayNhacAdapter nhacAdapter;
 
    public static ViewpagerPlay adapterplay;
 
@@ -67,6 +76,15 @@ public class PlayNhacActivity extends AppCompatActivity {
         init();
 
         click();
+    }
+
+    @Override
+    public void onBackPressed() {
+        mediaPlayer.stop();
+        mangbaihat.clear();
+        finish();
+        return;
+
     }
 
     private void Getintent() {
@@ -103,7 +121,9 @@ public class PlayNhacActivity extends AppCompatActivity {
                     {
                         handler.postDelayed(this, 300);
                     }
+
                 }
+
             }
         }, 500);
         imgplay.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +132,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                 if( mediaPlayer.isPlaying())
                 {
                     mediaPlayer.pause();
-                    imgplay.setImageResource(R.drawable.iconplay);
+                    imgplay.setImageResource(R.drawable.icplay);
                     if (fragment_disk.objectAnimator!=null){
                         fragment_disk.objectAnimator.pause();
                     }
@@ -120,7 +140,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                 else
                 {
                     mediaPlayer.start();
-                    imgplay.setImageResource(R.drawable.iconpause);
+                    imgplay.setImageResource(R.drawable.icpausepng);
                     if (fragment_disk.objectAnimator!=null){
                         fragment_disk.objectAnimator.resume();
                     }
@@ -135,14 +155,14 @@ public class PlayNhacActivity extends AppCompatActivity {
                     if(suff == true)
                     {
                         suff = false;
-                        imgrepeat.setImageResource(R.drawable.iconsyned);
-                        imgsuf.setImageResource(R.drawable.iconsuffle);
+                        imgrepeat.setImageResource(R.drawable.icrepeatedpng);
+                        imgsuf.setImageResource(R.drawable.icoshufle);
                     }
-                    imgrepeat.setImageResource(R.drawable.iconsyned);
+                    imgrepeat.setImageResource(R.drawable.icrepeatedpng);
                     repeat=true;
                 }
                 else{
-                    imgrepeat.setImageResource(R.drawable.iconrepeat);
+                    imgrepeat.setImageResource(R.drawable.icrepeatpng );
                     repeat = false;
                 }
             }
@@ -155,14 +175,15 @@ public class PlayNhacActivity extends AppCompatActivity {
                     if(repeat == true)
                     {
                         repeat = false;
-                        imgrepeat.setImageResource(R.drawable.iconrepeat);
-                        imgsuf.setImageResource(R.drawable.iconshuffled);
+                        imgrepeat.setImageResource(R.drawable.icrepeatpng);
+                        imgsuf.setImageResource(R.drawable.icoshufled);
                     }
-                    imgsuf.setImageResource(R.drawable.iconshuffled);
+                    imgsuf.setImageResource(R.drawable.icoshufled);
                     suff=true;
                 }
                 else{
-                    imgsuf.setImageResource(R.drawable.iconsuffle);
+
+                    imgsuf.setImageResource(R.drawable.icoshufle);
                     suff = false;
                 }
             }
@@ -196,7 +217,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                     }
                     if (position<mangbaihat.size())
                     {
-                        imgplay.setImageResource(R.drawable.iconpause);
+                        imgplay.setImageResource(R.drawable.icpausepng);
                         position++;
                         if(repeat)
                         {
@@ -221,7 +242,9 @@ public class PlayNhacActivity extends AppCompatActivity {
                         }
                         new playnhac().execute(mangbaihat.get(position).getLinkBaiHat());
                         fragment_disk.Playnhac(mangbaihat.get(position).getHinhBaiHat());
-                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                        //getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                        tencasi.setText(mangbaihat.get(position).getCaSi());
+                        tenbaihat.setText(mangbaihat.get(position).getTenBaiHat());
                         UpdateTime();
                     }
                 }
@@ -243,7 +266,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                     if (position<mangbaihat.size())
                     {
 
-                        imgplay.setImageResource(R.drawable.iconpause);
+                        imgplay.setImageResource(R.drawable.icpausepng);
                         position--;
                         if(position<0){
                             position = mangbaihat.size()-1;
@@ -265,7 +288,9 @@ public class PlayNhacActivity extends AppCompatActivity {
 
                         new playnhac().execute(mangbaihat.get(position).getLinkBaiHat());
                         fragment_disk.Playnhac(mangbaihat.get(position).getHinhBaiHat());
-                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                        //getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                        tencasi.setText(mangbaihat.get(position).getCaSi());
+                        tenbaihat.setText(mangbaihat.get(position).getTenBaiHat());
                         UpdateTime();
                     }
                 }
@@ -277,18 +302,25 @@ public class PlayNhacActivity extends AppCompatActivity {
 
 
     private void init() {
+
+
+        tencasi = (TextView)findViewById(R.id.tencasititle);
+        tenbaihat = (TextView)findViewById(R.id.tensongtitle);
         toolbarplaynhac = (Toolbar) findViewById(R.id.toolbarplaynhac);
-        timesong = (TextView) findViewById(R.id.timesong);
-        totaltimesong = (TextView) findViewById(R.id.totaltimesong);
+        timesong = (TextView) findViewById(R.id.timesongprocess);
+        totaltimesong = (TextView) findViewById(R.id.timesongtotal);
         imgnext = (ImageButton) findViewById(R.id.imgbuttonnext);
         imgplay = (ImageButton) findViewById(R.id.imgbuttonplay);
         imgpre = (ImageButton) findViewById(R.id.imgbuttonpre);
         imgrepeat = (ImageButton) findViewById(R.id.imgbuttonrepeat);
-        imgsuf = (ImageButton) findViewById(R.id.imgbuttonsuffle);
-        seekBar = (SeekBar) findViewById(R.id.seekbarsong);
+        imgsuf = (ImageButton) findViewById(R.id.shuffle);
+        seekBar = (SeekBar) findViewById(R.id.song_progress);
         viewPagerplaynhac = (ViewPager) findViewById(R.id.viewpagerplaynhac);
         setSupportActionBar(toolbarplaynhac);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(" ");
+
+
         toolbarplaynhac.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,6 +330,7 @@ public class PlayNhacActivity extends AppCompatActivity {
             }
         });
         toolbarplaynhac.setTitleTextColor(Color.WHITE);
+
 
         fragment_disk = new Fragment_Disk();
         fragment_play_baihat = new Fragment_play_baihat();
@@ -310,9 +343,13 @@ public class PlayNhacActivity extends AppCompatActivity {
         fragment_disk = (Fragment_Disk) adapterplay.getItem(0);
         if (mangbaihat.size() > 0) {
 
-            getSupportActionBar().setTitle(mangbaihat.get(0).getTenBaiHat());
+            //getSupportActionBar().setTitle(mangbaihat.get(0).getTenBaiHat());
             new playnhac().execute(mangbaihat.get(0).getLinkBaiHat());
-            imgplay.setImageResource(R.drawable.iconpause);
+            imgplay.setImageResource(R.drawable.icpausepng);
+            tencasi.setText(mangbaihat.get(0).getCaSi());
+            tenbaihat.setText(mangbaihat.get(0).getTenBaiHat());
+
+
         }
     }
     class playnhac extends AsyncTask<String,Void,String> {
@@ -362,10 +399,10 @@ public class PlayNhacActivity extends AppCompatActivity {
                     seekBar.setProgress(mediaPlayer.getCurrentPosition());
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
                     timesong.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
-                    handler.postDelayed(this, 300);
-                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
+                            handler.postDelayed(this, 300);
+                            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
                             next = true;
                         }
                     });
@@ -381,7 +418,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                 {
                     if (position<mangbaihat.size())
                     {
-                        imgplay.setImageResource(R.drawable.iconpause);
+                        imgplay.setImageResource(R.drawable.icpausepng);
                         position++;
                         if(repeat)
                         {
@@ -406,7 +443,9 @@ public class PlayNhacActivity extends AppCompatActivity {
                         }
                         new playnhac().execute(mangbaihat.get(position).getLinkBaiHat());
                         fragment_disk.Playnhac(mangbaihat.get(position).getHinhBaiHat());
-                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                        //getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+                        tencasi.setText(mangbaihat.get(position).getCaSi());
+                        tenbaihat.setText(mangbaihat.get(position).getTenBaiHat());
                     }
                     next = false;
                     handler1.removeCallbacks(this);
@@ -419,4 +458,5 @@ public class PlayNhacActivity extends AppCompatActivity {
             }
         },0);
     }
+
 }
