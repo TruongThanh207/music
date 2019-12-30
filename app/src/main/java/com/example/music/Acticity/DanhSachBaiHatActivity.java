@@ -6,20 +6,20 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.music.Adapter.ListbaihatAdapter;
 import com.example.music.Model.Album;
 import com.example.music.Model.BaiHat;
-import com.example.music.Model.ChuDe;
 import com.example.music.Model.CustomTheloai;
 import com.example.music.Model.Playlist;
 import com.example.music.Model.Quangcao;
@@ -41,7 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhSachBaiHatActivity extends AppCompatActivity {
+public class DanhSachBaiHatActivity extends AppCompatActivity{
 
     CoordinatorLayout coordinatorLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -52,24 +52,32 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     CustomTheloai customTheloai;
     Playlist playlist;
     Album album;
+
+    boolean isPlaying = false;
     TheLoai theLoai;
     ImageView imageViewbaihat;
+    int position = 0;
     ArrayList<BaiHat> arrayBaihat;
     ListbaihatAdapter listbaihatAdapter;
+    NotificationManager notificationManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh_sach_bai_hat);
 
+        StrictMode.ThreadPolicy mode = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(mode);
+
         DataIntent();
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.coolapsingtoolbar);
-        toolbar =(Toolbar) findViewById(R.id.toolbardanhsach);
+        toolbar = (Toolbar) findViewById(R.id.toolbardanhsach);
         recyclerViewDanhsachbaihat = (RecyclerView) findViewById(R.id.recycleviewdanhsachbaihat);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingaction);
-        imageViewbaihat =(ImageView) findViewById(R.id.imgdanhdachbaihat);
-        floatingActionButton.setEnabled(false);
+        imageViewbaihat = (ImageView) findViewById(R.id.imgdanhdachbaihat);
+        floatingActionButton.setEnabled(true);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,40 +91,36 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
 
 
-
-        if(quangcao!=null && !quangcao.getTenBaiHat().equals(""))
-        {
-            SetValue(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
+        if (quangcao != null && !quangcao.getTenBaiHat().equals("")) {
+            SetValue(quangcao.getHinhBaiHat());
             GetData(quangcao.getIdQuangCao());
         }
 
-        if(playlist!=null && !playlist.getTen().equals(""))
-        {
-            SetValue(playlist.getTen(), playlist.getIcon());
+        if (playlist != null && !playlist.getTen().equals("")) {
+            SetValue(playlist.getIcon());
             GetDataPlaylist(playlist.getIsPlaylist());
         }
 
-        if(customTheloai!=null && !customTheloai.getTenTheLoai().equals(""))
-        {
-            SetValue(customTheloai.getTenTheLoai(), customTheloai.getHinhTheLoai());
+        if (customTheloai != null && !customTheloai.getTenTheLoai().equals("")) {
+            SetValue(customTheloai.getHinhTheLoai());
             GetDataTheLoai(customTheloai.getIdTheLoai());
         }
 
-        if(album!=null && !album.getTenAlbum().equals(""))
-        {
-            SetValue(album.getTenAlbum(), album.getHinhAlbum());
+        if (album != null && !album.getTenAlbum().equals("")) {
+            SetValue(album.getHinhAlbum());
             GetDataAlbum(album.getIdAlbum());
         }
 
-        if(theLoai!=null && !theLoai.getTenTheLoai().equals(""))
-        {
-            SetValue(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
-            GetDataTheLoaiofChude(theLoai.getIdTheLoai());
+        if (theLoai != null && !theLoai.getTenTheLoai().equals("")) {
+            SetValue(theLoai.getHinhTheLoai());
+            GetDataTheLoaiofChude();
         }
     }
 
-    private void GetDataTheLoaiofChude(String idTheLoai) {
-        Dataservice dataservice= APIservice.getService();
+
+
+    private void GetDataTheLoaiofChude() {
+        Dataservice dataservice = APIservice.getService();
         Call<List<BaiHat>> callback = dataservice.Getdanhsachbaihattheotheloai(theLoai.getIdTheLoai());
         callback.enqueue(new Callback<List<BaiHat>>() {
             @Override
@@ -136,7 +140,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     }
 
     private void GetDataAlbum(String idAlbum) {
-        Dataservice dataservice= APIservice.getService();
+        Dataservice dataservice = APIservice.getService();
         Call<List<BaiHat>> callback = dataservice.Getdanhsachbaihattheoalbum(idAlbum);
         callback.enqueue(new Callback<List<BaiHat>>() {
             @Override
@@ -195,7 +199,8 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         });
     }
 
-    private void SetValue(String ten, String hinh) {
+
+    private void SetValue(String hinh) {
         collapsingToolbarLayout.setTitle(" ");
         try {
             URL url = new URL(hinh);
@@ -210,6 +215,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         Picasso.with(this).load(hinh).into(imageViewbaihat);
 
     }
+
     private void GetData(String idquangcao) {
         Dataservice dataservice = APIservice.getService();
         Call<List<BaiHat>> callback = dataservice.Getdanhsachbaihattheoquangcao(idquangcao);
@@ -222,6 +228,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
                 recyclerViewDanhsachbaihat.setAdapter(listbaihatAdapter);
                 click();
 
+
             }
 
             @Override
@@ -232,48 +239,43 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     }
 
 
-
     private void DataIntent() {
         Intent intent = getIntent();
-        if(intent != null)
-        {
-            if(intent.hasExtra("banner"))
-            {
+        if (intent != null) {
+            if (intent.hasExtra("banner")) {
                 quangcao = (Quangcao) intent.getSerializableExtra("banner");
             }
-           if(intent.hasExtra("playlist"))
-            {
+            if (intent.hasExtra("playlist")) {
                 playlist = (Playlist) intent.getSerializableExtra("playlist");
 
             }
-            if(intent.hasExtra("theloai"))
-            {
+            if (intent.hasExtra("theloai")) {
                 customTheloai = (CustomTheloai) intent.getSerializableExtra("theloai");
 
             }
-            if(intent.hasExtra("Album"))
-            {
+            if (intent.hasExtra("Album")) {
                 album = (Album) intent.getSerializableExtra("Album");
 
             }
-            if(intent.hasExtra("theloaiofchude"))
-            {
+            if (intent.hasExtra("theloaiofchude")) {
                 theLoai = (TheLoai) intent.getSerializableExtra("theloaiofchude");
 
             }
 
         }
     }
-    private void click()
-    {
-        floatingActionButton.setEnabled(true);
+
+    private void click() {
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DanhSachBaiHatActivity.this, PlayNhacActivity.class);
                 intent.putExtra("cacbainhac", arrayBaihat);
                 startActivity(intent);
+
             }
         });
     }
 }
+

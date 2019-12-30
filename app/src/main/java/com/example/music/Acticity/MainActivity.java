@@ -11,9 +11,10 @@ import com.example.music.Fragment.Fragment_trang_chu;
 import com.example.music.R;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     ViewPager viewPager;
     TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,4 +34,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ichomewhite);
         tabLayout.getTabAt(1).setIcon(R.drawable.icsearh);
     }
+
+
+
 }
