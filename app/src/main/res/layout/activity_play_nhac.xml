@@ -16,14 +16,18 @@
 
         android:layout_height="?attr/actionBarSize"/>
     <androidx.viewpager.widget.ViewPager
+
         android:id="@+id/viewpagerplaynhac"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="8"/>
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="15dp"
         android:orientation="vertical"
+
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
 
@@ -98,7 +102,14 @@
             android:layout_gravity="center"
             android:maxHeight="2dp"
             android:paddingTop="10dp"
-            android:progress="30"
+            android:paddingBottom="6dp"
+            android:progress="50"
+
+            android:thumb="@drawable/ic_brightness_1_black_24dp"
+            android:progressTint="@android:color/white"
+            android:progressBackgroundTint="@android:color/darker_gray"
+            android:thumbTint="@android:color/white"
+
             android:tag="tint_accent_color" />
 
         <RelativeLayout
@@ -106,12 +117,12 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:textColor="#FFFFFF"
                 android:id="@+id/timesongprocess"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="25dp" />
+                android:paddingRight="25dp" />
 
             <TextView
                 android:textColor="#FFFFFF"
@@ -120,45 +131,56 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:paddingRight="25dp" />
+
+
         </RelativeLayout>
 
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="50dp"
-            android:layout_centerInParent="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <ImageButton
-                android:src="@drawable/icpre"
                 android:id="@+id/imgbuttonpre"
-                android:scaleType="fitXY"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:background="@null"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/icpre" />
+
             <ImageButton
-                android:src="@drawable/icplay"
                 android:id="@+id/imgbuttonplay"
-                android:scaleType="fitXY"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:background="@null"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/icplay" />
+
             <ImageButton
-                android:src="@drawable/icnext1"
                 android:id="@+id/imgbuttonnext"
-                android:scaleType="fitXY"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:background="@null"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/icnext1" />
 
 
         </LinearLayout>
 
     </LinearLayout>
+
+
+
+
+
+
 
 </LinearLayout>

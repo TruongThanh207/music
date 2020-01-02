@@ -1,7 +1,10 @@
 package com.example.music.Adapter;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.music.Acticity.DanhSachBaiHatActivity;
 import com.example.music.Acticity.PlayNhacActivity;
+import com.example.music.CreateNotification;
 import com.example.music.Model.BaiHat;
 import com.example.music.R;
 import com.example.music.Service.APIservice;
@@ -28,6 +32,9 @@ import retrofit2.Response;
 public class ListbaihatAdapter extends RecyclerView.Adapter<ListbaihatAdapter.ViewHolder> {
     Context context;
     ArrayList<BaiHat> mangbaihat;
+    NotificationManager notificationManager;
+    PlayNhacActivity playNhacActivity;
+    int position=0;
 
     public ListbaihatAdapter(Context context, ArrayList<BaiHat> mangbaihat) {
         this.context = context;
@@ -39,8 +46,24 @@ public class ListbaihatAdapter extends RecyclerView.Adapter<ListbaihatAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.body_danh_sach_bai_hat, parent, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createChannel();
+
+        }
         return new ViewHolder(view);
     }
+    private void createChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
+                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
+
+            notificationManager = playNhacActivity.getSystemService(NotificationManager.class);
+            if (notificationManager != null){
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+    }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -70,6 +93,8 @@ public class ListbaihatAdapter extends RecyclerView.Adapter<ListbaihatAdapter.Vi
             itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        CreateNotification.createNotification(context, mangbaihat.get(getAdapterPosition()), R.drawable.ic_pause_black_24dp, position, mangbaihat.size()-1);
                         Intent  intent = new Intent(context, PlayNhacActivity.class);
                         intent.putExtra("bainhac", mangbaihat.get(getPosition()));
                         context.startActivity(intent);

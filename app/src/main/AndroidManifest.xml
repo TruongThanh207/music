@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Acticity.MainActivity"></activity>
+
+        <activity android:name=".Acticity.MainActivity" />
         <activity android:name=".Acticity.PlayNhacActivity" />
         <activity android:name=".Acticity.DanhSachAlbumActivity" />
         <activity android:name=".Acticity.DanhSachTheLoaiActivity" />
@@ -26,6 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Adapter.BaiHatHotAdapter" />
+        <receiver android:name=".Service.NotificationActionService"/>
+        <service android:name=".Service.OnClearFromRecentService"/>
     </application>
 
 </manifest>

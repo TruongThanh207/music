@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,30 @@ public class Fragment_play_baihat extends Fragment {
             recyclerViewplaybaihat.setAdapter(playnhacAdapter);
         }
 
+
+
+
+
+
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT)  {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                PlayNhacActivity.mangbaihat.remove(position);
+                playnhacAdapter.notifyDataSetChanged();
+
+
+
+            }
+        });
+
+        touchHelper.attachToRecyclerView(recyclerViewplaybaihat);
         return view;
+
     }
 }

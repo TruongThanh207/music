@@ -1,7 +1,11 @@
 package com.example.music.Adapter;
 
+import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.music.Acticity.PlayNhacActivity;
+import com.example.music.CreateNotification;
 import com.example.music.Model.BaiHat;
 import com.example.music.R;
 import com.example.music.Service.APIservice;
@@ -25,10 +31,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+
 public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.ViewHolder> {
 
     Context context;
     ArrayList<BaiHat> baihatArraylist;
+    PlayNhacActivity playNhacActivity;
+    NotificationManager notificationManager;
+    int position=0;
+
 
     public BaiHatHotAdapter(Context context, ArrayList<BaiHat> baihatArraylist) {
         this.context = context;
@@ -40,8 +52,25 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.body_baihat_hot, parent, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createChannel();
+
+        }
         return new ViewHolder(view);
+
     }
+    private void createChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
+                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
+
+            notificationManager = playNhacActivity.getSystemService(NotificationManager.class);
+            if (notificationManager != null){
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+    }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -68,11 +97,13 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    CreateNotification.createNotification(context, baihatArraylist.get(getAdapterPosition()), R.drawable.ic_pause_black_24dp, 0, 0);
                     Intent intent = new Intent(context, PlayNhacActivity.class);
                     intent.putExtra("bainhac", baihatArraylist.get(getPosition()));
                     context.startActivity(intent);
                 }
             });
+
             luotthich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

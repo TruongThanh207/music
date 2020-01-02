@@ -1,6 +1,9 @@
 package com.example.music.Fragment;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.music.Acticity.DanhSachTheLoaiActivity;
 import com.example.music.Adapter.SearchAdapter;
+import com.example.music.CreateNotification;
 import com.example.music.Model.BaiHat;
 import com.example.music.R;
 import com.example.music.Service.APIservice;
@@ -40,6 +44,7 @@ public class Fragment_tim_kiem extends Fragment {
     RecyclerView recyclerViewtimkiem;
     TextView textViewnodata;
     SearchAdapter searchAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,8 +56,11 @@ public class Fragment_tim_kiem extends Fragment {
         toolbartimkiem.setTitle("");
         setHasOptionsMenu(true);
 
+
         return view;
     }
+
+
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -123,5 +131,6 @@ public class Fragment_tim_kiem extends Fragment {
 
             }
         });
+
     }
 }

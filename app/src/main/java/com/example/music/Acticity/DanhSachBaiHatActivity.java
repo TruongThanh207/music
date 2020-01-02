@@ -6,18 +6,22 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.music.Adapter.ListbaihatAdapter;
+import com.example.music.Adapter.PlayNhacAdapter;
+import com.example.music.CreateNotification;
 import com.example.music.Model.Album;
 import com.example.music.Model.BaiHat;
 import com.example.music.Model.CustomTheloai;
@@ -59,7 +63,10 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
     int position = 0;
     ArrayList<BaiHat> arrayBaihat;
     ListbaihatAdapter listbaihatAdapter;
+    PlayNhacActivity playNhacActivity;
+
     NotificationManager notificationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,11 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
 
         DataIntent();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createChannel();
+
+        }
+
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.coolapsingtoolbar);
         toolbar = (Toolbar) findViewById(R.id.toolbardanhsach);
@@ -79,7 +91,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
         imageViewbaihat = (ImageView) findViewById(R.id.imgdanhdachbaihat);
         floatingActionButton.setEnabled(true);
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar); collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +99,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
                 finish();
             }
         });
-        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
 
 
@@ -116,6 +128,19 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
             GetDataTheLoaiofChude();
         }
     }
+    private void createChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
+                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
+
+            notificationManager = playNhacActivity.getSystemService(NotificationManager.class);
+            if (notificationManager != null){
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+    }
+
+
 
 
 
@@ -270,6 +295,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CreateNotification.createNotification(DanhSachBaiHatActivity.this, arrayBaihat.get(position), R.drawable.ic_pause_black_24dp, position, arrayBaihat.size()-1);
                 Intent intent = new Intent(DanhSachBaiHatActivity.this, PlayNhacActivity.class);
                 intent.putExtra("cacbainhac", arrayBaihat);
                 startActivity(intent);

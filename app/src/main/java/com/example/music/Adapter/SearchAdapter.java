@@ -1,18 +1,25 @@
 package com.example.music.Adapter;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.music.Acticity.DanhSachBaiHatActivity;
 import com.example.music.Acticity.PlayNhacActivity;
+import com.example.music.CreateNotification;
+import com.example.music.Fragment.Fragment_play_baihat;
 import com.example.music.Model.BaiHat;
 import com.example.music.R;
 import com.squareup.picasso.Picasso;
@@ -23,6 +30,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     Context context;
     ArrayList<BaiHat> arraysearch;
+    PlayNhacAdapter playNhacAdapter;
+    PlayNhacActivity playNhacActivity;
+    NotificationManager notificationManager;
+    int position = 0;
 
     public SearchAdapter(Context context, ArrayList<BaiHat> arraysearch) {
         this.context = context;
@@ -34,7 +45,22 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.body_tim_kiem, parent, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createChannel();
+
+        }
         return new ViewHolder(view);
+    }
+    private void createChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
+                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
+
+            notificationManager = playNhacActivity.getSystemService(NotificationManager.class);
+            if (notificationManager != null){
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
     }
 
     @Override
@@ -54,7 +80,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
         ImageView imgbailat;
         TextView tencasitimkiem, tenbaihattimkiem;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             imgbailat = itemView.findViewById(R.id.imgtimkiembaihat);
             tenbaihattimkiem= itemView.findViewById(R.id.tenbaihattimkiem);
@@ -62,11 +88,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    CreateNotification.createNotification(context, arraysearch.get(getAdapterPosition()), R.drawable.ic_pause_black_24dp, position, arraysearch.size()-1);
                     Intent intent = new Intent(context, PlayNhacActivity.class);
                     intent.putExtra("bainhac", arraysearch.get(getPosition()) );
                     context.startActivity(intent);
+
+
                 }
             });
+
         }
     }
 }
