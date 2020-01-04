@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity{
         init();
     }
 
-    private void init() {
+    private void init() {  //khởi tạo MainViewAdapter, thêm 2 fragment vào list Fragment rồi đổ vào viewPager.
         MainViewAdapter mainViewAdapter= new MainViewAdapter(getSupportFragmentManager());
         mainViewAdapter.addFragment(new Fragment_trang_chu());
         mainViewAdapter.addFragment(new Fragment_tim_kiem());
