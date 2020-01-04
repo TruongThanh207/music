@@ -30,7 +30,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     Context context;
     ArrayList<BaiHat> arraysearch;
-    PlayNhacAdapter playNhacAdapter;
+
     PlayNhacActivity playNhacActivity;
     NotificationManager notificationManager;
     int position = 0;

@@ -17,6 +17,10 @@ import com.example.music.Acticity.PlayNhacActivity;
 import com.example.music.Model.BaiHat;
 import com.example.music.Service.NotificationActionService;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class CreateNotification {
@@ -37,7 +41,25 @@ public class CreateNotification {
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
             MediaSessionCompat mediaSessionCompat = new MediaSessionCompat(context, "tag");
 
-            Bitmap icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon);
+
+            Bitmap myBitmap = null;
+            try {
+                URL url = new URL(baiHat.getHinhBaiHat());
+                HttpURLConnection connection = null;
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                myBitmap = BitmapFactory.decodeStream(input);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(myBitmap == null)
+            {
+                Bitmap icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon);
+            }
+
 
 
            /* Intent notificationIntent = new Intent(context, PlayNhacActivity.class);
@@ -84,7 +106,7 @@ public class CreateNotification {
                     .setSmallIcon(R.drawable.ic_music_note)
                     .setContentTitle(baiHat.getTenBaiHat())
                     .setContentText(baiHat.getCaSi())
-                    .setLargeIcon(icon)
+                    .setLargeIcon(myBitmap)
                     .setOnlyAlertOnce(true)
                     .setShowWhen(false)
 

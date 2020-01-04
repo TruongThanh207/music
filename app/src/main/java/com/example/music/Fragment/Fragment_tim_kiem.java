@@ -2,6 +2,7 @@ package com.example.music.Fragment;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.music.Acticity.DanhSachTheLoaiActivity;
+import com.example.music.Acticity.PlayNhacActivity;
 import com.example.music.Adapter.SearchAdapter;
 import com.example.music.CreateNotification;
 import com.example.music.Model.BaiHat;
@@ -41,9 +44,11 @@ import retrofit2.Response;
 public class Fragment_tim_kiem extends Fragment {
     View view;
     Toolbar toolbartimkiem;
-    RecyclerView recyclerViewtimkiem;
-    TextView textViewnodata;
+    RecyclerView recyclerViewtimkiem, recycler10baihat;
+    TextView textgoiy, textkhongtimthay;
     SearchAdapter searchAdapter;
+    ImageView imageView;
+    int position =0;
 
     @Nullable
     @Override
@@ -51,15 +56,46 @@ public class Fragment_tim_kiem extends Fragment {
         view = inflater.inflate(R.layout.fragment_tim_kiem, container, false);
         toolbartimkiem = view.findViewById(R.id.toolbartimkiem);
         recyclerViewtimkiem = view.findViewById(R.id.recyctimkiem);
-        textViewnodata = view.findViewById(R.id.txtkhongcodulieu);
+        recycler10baihat = view.findViewById(R.id.recyc10baihat);
+        textgoiy = view.findViewById(R.id.goiy);
+        imageView = view.findViewById(R.id.addlist);
+        textkhongtimthay = view.findViewById(R.id.khongtimthay);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbartimkiem);
         toolbartimkiem.setTitle("");
         setHasOptionsMenu(true);
 
-
+        GetData();
         return view;
     }
 
+    private void GetData() {
+        Dataservice dataservice = APIservice.getService();
+        Call<List<BaiHat>> callback = dataservice.Get10baihatrandom();
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                final ArrayList<BaiHat> mangbaihat = (ArrayList<BaiHat>) response.body();
+                searchAdapter = new SearchAdapter(getActivity(), mangbaihat);
+                recycler10baihat.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recycler10baihat.setAdapter(searchAdapter);
+                textkhongtimthay.setVisibility(View.GONE);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        CreateNotification.createNotification(getActivity(), mangbaihat.get(position), R.drawable.ic_pause_black_24dp, position, mangbaihat.size()-1);
+                        Intent intent = new Intent(getActivity(), PlayNhacActivity.class);
+                        intent.putExtra("cacbainhac", mangbaihat);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
+    }
 
 
     @Override
@@ -93,9 +129,9 @@ public class Fragment_tim_kiem extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                GetDataSearch(newText);
+                //GetDataSearch(newText);
 
-                return true;
+                return false;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
@@ -113,13 +149,19 @@ public class Fragment_tim_kiem extends Fragment {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerViewtimkiem.setLayoutManager(linearLayoutManager);
                     recyclerViewtimkiem.setAdapter(searchAdapter);
-                    textViewnodata.setVisibility(View.GONE);
+                    recycler10baihat.setVisibility(View.GONE);
+                    textkhongtimthay.setVisibility(View.GONE);
+                    textgoiy.setVisibility(View.GONE);
+                    imageView.setVisibility(View.GONE);
                     recyclerViewtimkiem.setVisibility(View.VISIBLE);
                 }
                 else
                 {
+                    textgoiy.setVisibility(View.VISIBLE);
+                    textkhongtimthay.setVisibility(View.VISIBLE);
                     recyclerViewtimkiem.setVisibility(View.GONE);
-                    textViewnodata.setVisibility(View.VISIBLE);
+                    recycler10baihat.setVisibility(View.VISIBLE);
+                    imageView.setVisibility(View.VISIBLE);
 
                 }
 

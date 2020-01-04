@@ -74,4 +74,7 @@ public interface Dataservice {
     @FormUrlEncoded
     @POST("timkiembaihat.php")
     Call<List<BaiHat>> SearchBaihat(@Field("key") String key);
+
+    @GET("Random10baihat.php")
+    Call<List<BaiHat>> Get10baihatrandom();
 }

@@ -21,14 +21,46 @@
 
     </androidx.recyclerview.widget.RecyclerView>
     <TextView
-        android:layout_width="match_parent"
-        android:textSize="17sp"
-        android:id="@+id/txtkhongcodulieu"
-        android:gravity="center"
+        android:id="@+id/khongtimthay"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Không tìm thấy bài hát "
         android:textColor="#FFFFFF"
-        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:padding="10dp"
         android:layout_below="@id/appbarlayouttimkiem"
-        android:text="Không có bài hát"
-        android:layout_height="wrap_content"/>
+        />
+    <TextView
+        android:id="@+id/goiy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Có thể bạn biết "
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:layout_below="@id/khongtimthay"
+        />
+    <ImageView
+        android:id="@+id/addlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/khongtimthay"
+        android:src="@drawable/ic_slow_motion_video_black_24dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recyc10baihat"
+        android:layout_below="@id/goiy"
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

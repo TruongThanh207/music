@@ -41,5 +41,4 @@ dependencies {
     implementation 'com.android.support:design:29.1.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
-
 }
