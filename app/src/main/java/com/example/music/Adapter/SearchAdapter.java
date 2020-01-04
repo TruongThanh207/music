@@ -31,8 +31,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     Context context;
     ArrayList<BaiHat> arraysearch;
 
-    PlayNhacActivity playNhacActivity;
-    NotificationManager notificationManager;
+
     int position = 0;
 
     public SearchAdapter(Context context, ArrayList<BaiHat> arraysearch) {
@@ -45,24 +44,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.body_tim_kiem, parent, false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            createChannel();
 
-        }
         return new ViewHolder(view);
     }
-    private void createChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
-                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
-
-            notificationManager = playNhacActivity.getSystemService(NotificationManager.class);
-            if (notificationManager != null){
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
-    }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BaiHat baiHat = arraysearch.get(position);

@@ -37,8 +37,7 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
 
     Context context;
     ArrayList<BaiHat> baihatArraylist;
-    PlayNhacActivity playNhacActivity;
-    NotificationManager notificationManager;
+
     int position=0;
 
 
@@ -52,23 +51,9 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.body_baihat_hot, parent, false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            createChannel();
 
-        }
         return new ViewHolder(view);
 
-    }
-    private void createChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
-                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
-
-            notificationManager = playNhacActivity.getSystemService(NotificationManager.class);
-            if (notificationManager != null){
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
     }
 
 

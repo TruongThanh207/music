@@ -61,15 +61,6 @@ public class CreateNotification {
             }
 
 
-
-           /* Intent notificationIntent = new Intent(context, PlayNhacActivity.class);
-
-            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-            PendingIntent intent = PendingIntent.getActivity(context, 0,
-                    notificationIntent, 0);*/
-
             PendingIntent pendingIntentPrevious;
             int drw_previous;
             if (position == 0){

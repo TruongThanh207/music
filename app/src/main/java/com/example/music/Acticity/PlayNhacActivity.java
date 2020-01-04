@@ -58,7 +58,6 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
     Fragment_Disk fragment_disk;
     Fragment_play_baihat fragment_play_baihat;
     MediaPlayer mediaPlayer;
-    PlayNhacAdapter playNhacAdapter;
 
     NotificationManager notificationManager;
     int position=0;
@@ -92,9 +91,7 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
 
         Getintent();
 
-
         init();
-
 
         click();
 
@@ -106,6 +103,12 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        mediaPlayer.stop();
+        mangbaihat.clear();
+    }
 
     private void createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -158,8 +161,6 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
                 ArrayList<BaiHat> arrayListExtra = intent.getParcelableArrayListExtra("cacbainhac");
                 for(int i=0; i<arrayListExtra.size(); i++)
                     mangbaihat.add(arrayListExtra.get(i));
-
-
             }
 
         }
@@ -648,7 +649,6 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
                             next = true;
                         }
                     });
-
                 }
             }
         }, 300);

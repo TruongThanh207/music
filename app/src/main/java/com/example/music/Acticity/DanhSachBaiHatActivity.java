@@ -63,10 +63,6 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
     int position = 0;
     ArrayList<BaiHat> arrayBaihat;
     ListbaihatAdapter listbaihatAdapter;
-    PlayNhacActivity playNhacActivity;
-
-    NotificationManager notificationManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +74,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
 
         DataIntent();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            createChannel();
 
-        }
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.coolapsingtoolbar);
@@ -128,19 +121,6 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
             GetDataTheLoaiofChude();
         }
     }
-    private void createChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
-                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
-
-            notificationManager = playNhacActivity.getSystemService(NotificationManager.class);
-            if (notificationManager != null){
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
-    }
-
-
 
 
 
