@@ -97,54 +97,6 @@ public class Fragment_chude_theloai extends Fragment {
             }
         });
     }
-       /*{
-            @Override
-            public void onResponse(Call<ChuDevaTheLoai> call, Response<ChuDevaTheLoai> response) {
-                chuDevaTheLoai = response.body();
-
-                final ArrayList<TheLoai>  arrayTheLoai = new ArrayList<>();
-                arrayTheLoai.addAll(chuDevaTheLoai.getTheLoai());
-
-                LinearLayout linearLayout = new LinearLayout(getActivity());
-                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-                LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(580,250);
-                layout.setMargins(10,10,10,20);
-
-                for (int j=0; j<arrayTheLoai.size(); j++)
-                {
-                    CardView cardView = new CardView(getActivity());
-                    cardView.setRadius(10);
-                    ImageView imageView = new ImageView(getActivity());
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                    if(arrayTheLoai.get(j).getHinhTheLoai()!=null)
-                    {
-                        Picasso.with(getActivity()).load(arrayTheLoai.get(j).getHinhTheLoai()).into(imageView);
-                    }
-                    cardView.setLayoutParams(layout);
-                    cardView.addView(imageView);
-                    linearLayout.addView(cardView);
-                    final int finalJ = j;
-                   imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(getActivity(), DanhSachBaiHatActivity.class);
-                            intent.putExtra("theloai", arrayTheLoai.get(finalJ));
-                            startActivity(intent);
-                        }
-                    });
-                }
-                horizontalScrollView.addView(linearLayout);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ChuDevaTheLoai> call, Throwable t) {
-
-            }
-        });*/
-
 
 
 }

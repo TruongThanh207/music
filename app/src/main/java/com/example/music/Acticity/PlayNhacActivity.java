@@ -97,7 +97,7 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            createChannel();
+            //createChannel();
             registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
             startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
         }
@@ -110,7 +110,7 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
         mangbaihat.clear();
     }
 
-    private void createChannel() {
+   /* private void createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
                     "KOD Dev", NotificationManager.IMPORTANCE_LOW);
@@ -120,7 +120,7 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
                 notificationManager.createNotificationChannel(channel);
             }
         }
-    }
+    }*/
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

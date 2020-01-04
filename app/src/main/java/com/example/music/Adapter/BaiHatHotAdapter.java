@@ -119,14 +119,7 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
                 }
 
             });
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent  intent = new Intent(context, PlaynhacActivity.class);
-                    intent.putExtra("bainhac", baihatArraylist.get(getPosition()));
-                    context.startActivity(intent);
-                }
-            });*/
+
         }
     }
 }
