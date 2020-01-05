@@ -14,8 +14,7 @@ APK File: [Download](https://drive.google.com/file/d/1-hxF8kv7nrVFtD8a6JAIcqV-wd
 
 Link Dự Phòng: [Link 2](https://www.sieutoc.top/file/d/x064kzjAe9fQDkArmM1dGJ/view)
 
-![](https://i.imgur.com/3AXrgzW.jpg)
+![](https://i.imgur.com/AJMV0Uj.jpg)
 
-![](https://i.imgur.com/mUOLFe3.jpg)
- 
+
 
