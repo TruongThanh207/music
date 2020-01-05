@@ -1,8 +1,11 @@
-API 21 lên xuống (<thông báo API 26 không giới hạn)	
+API 21 trở lên
 
 
 Cơ sở dữ liệu: https://www.000webhost.com/	
 
 Tk: vfrshjklg@gmai.com	
 
-mk: tình yêu0510
+mk: love0510
+
+[URL="https://drive.google.com/file/d/1-hxF8kv7nrVFtD8a6JAIcqV-wd6qWWi3/view?usp=sharing"]Download[/URL]
+ 
