@@ -7,5 +7,5 @@ Tk: vfrshjklg@gmai.com
 
 mk: love0510
 
-[URL="https://drive.google.com/file/d/1-hxF8kv7nrVFtD8a6JAIcqV-wd6qWWi3/view?usp=sharing"]Download[/URL]
+https://drive.google.com/file/d/1-hxF8kv7nrVFtD8a6JAIcqV-wd6qWWi3/view?usp=sharing
  
