@@ -27,7 +27,7 @@ public interface Dataservice {
     Call<List<Playlist>> GetPlaylist();
 
     @GET("theloai.php")
-    Call<List<CustomTheloai>> GetcustomTheloai();
+    Call<List<TheLoai>> GetcustomTheloai();
 
     @GET("theloaichude..php")
     Call<ChuDevaTheLoai> GetDataChuDeVaTheLoai();

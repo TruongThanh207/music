@@ -58,11 +58,11 @@ public class Fragment_chude_theloai extends Fragment {
 
     private void Getdata() {
         Dataservice dataservice = APIservice.getService();
-        Call<List<CustomTheloai>> callback = dataservice.GetcustomTheloai();
-        callback.enqueue(new Callback<List<CustomTheloai>>() {
+        Call<List<TheLoai>> callback = dataservice.GetcustomTheloai();
+        callback.enqueue(new Callback<List<TheLoai>>() {
             @Override
-            public void onResponse(Call<List<CustomTheloai>> call, Response<List<CustomTheloai>> response) {
-                final ArrayList<CustomTheloai> mangcustomtheloai = (ArrayList<CustomTheloai>) response.body();
+            public void onResponse(Call<List<TheLoai>> call, Response<List<TheLoai>> response) {
+                final ArrayList<TheLoai> mangcustomtheloai = (ArrayList<TheLoai>) response.body();
                 LinearLayout linearLayout = new LinearLayout(getActivity());
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(600,400);
@@ -83,7 +83,7 @@ public class Fragment_chude_theloai extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(getActivity(), DanhSachBaiHatActivity.class);
-                            intent.putExtra("theloai", mangcustomtheloai.get(finalJ));
+                            intent.putExtra("theloaiofchude", mangcustomtheloai.get(finalJ));
                             startActivity(intent);
                         }
                     });
@@ -92,7 +92,7 @@ public class Fragment_chude_theloai extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<CustomTheloai>> call, Throwable t) {
+            public void onFailure(Call<List<TheLoai>> call, Throwable t) {
 
             }
         });

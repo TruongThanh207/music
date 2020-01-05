@@ -1,10 +1,8 @@
-API 21 trở lên
+API 21 lên xuống (<thông báo API 26 không giới hạn)	
+
 
 Cơ sở dữ liệu: https://www.000webhost.com/	
 
-Tk: vfrshjklg@gmail.com	
+Tk: vfrshjklg@gmai.com	
 
-mk: love0510
-
-link APK: https://www.sieutoc.top/file/d/qGZY4E7a6NfVPka5pRnLzy/view
-
+mk: tình yêu0510

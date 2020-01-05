@@ -53,7 +53,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
     RecyclerView recyclerViewDanhsachbaihat;
     FloatingActionButton floatingActionButton;
     Quangcao quangcao;
-    CustomTheloai customTheloai;
+
     Playlist playlist;
     Album album;
 
@@ -106,10 +106,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
             GetDataPlaylist(playlist.getIsPlaylist());
         }
 
-        if (customTheloai != null && !customTheloai.getTenTheLoai().equals("")) {
-            SetValue(customTheloai.getHinhTheLoai());
-            GetDataTheLoai(customTheloai.getIdTheLoai());
-        }
+
 
         if (album != null && !album.getTenAlbum().equals("")) {
             SetValue(album.getHinhAlbum());
@@ -164,25 +161,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
         });
     }
 
-    private void GetDataTheLoai(String idTheLoai) {
-        Dataservice dataservice = APIservice.getService();
-        Call<List<BaiHat>> callback = dataservice.Getdanhsachbaihattheotheloai(idTheLoai);
-        callback.enqueue(new Callback<List<BaiHat>>() {
-            @Override
-            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
-                arrayBaihat = (ArrayList<BaiHat>) response.body();
-                listbaihatAdapter = new ListbaihatAdapter(DanhSachBaiHatActivity.this, arrayBaihat);
-                recyclerViewDanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHatActivity.this));
-                recyclerViewDanhsachbaihat.setAdapter(listbaihatAdapter);
-                click();
-            }
 
-            @Override
-            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
-
-            }
-        });
-    }
 
     private void GetDataPlaylist(String isPlaylist) {
         Dataservice dataservice = APIservice.getService();
@@ -254,10 +233,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity{
                 playlist = (Playlist) intent.getSerializableExtra("playlist");
 
             }
-            if (intent.hasExtra("theloai")) {
-                customTheloai = (CustomTheloai) intent.getSerializableExtra("theloai");
 
-            }
             if (intent.hasExtra("Album")) {
                 album = (Album) intent.getSerializableExtra("Album");
 
