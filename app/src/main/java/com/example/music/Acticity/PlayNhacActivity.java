@@ -49,7 +49,10 @@ import java.util.Random;
 public class PlayNhacActivity extends AppCompatActivity implements Playable {
 
     Toolbar toolbarplaynhac;
-    TextView timesong, totaltimesong, tencasi, tenbaihat;
+    public TextView timesong;
+    public TextView totaltimesong;
+    public static TextView tencasi;
+    public static TextView tenbaihat;
     SeekBar seekBar;
     ImageButton imgplay, imgpre,  imgnext,imgsuf, imgrepeat;
 
@@ -57,10 +60,10 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
     ViewPager viewPagerplaynhac;
     Fragment_Disk fragment_disk;
     Fragment_play_baihat fragment_play_baihat;
-    MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
 
     NotificationManager notificationManager;
-    int position=0;
+    public static int position=0;
     boolean isPlaying= true;
 
 
@@ -107,7 +110,10 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
     public void onBackPressed() {
         finish();
         mediaPlayer.stop();
+        CreateNotification.createNotification(PlayNhacActivity.this, mangbaihat.get(position),
+                R.drawable.ic_play_arrow_black_24dp, 1, 2);
         mangbaihat.clear();
+
     }
 
    /* private void createChannel() {
@@ -557,14 +563,10 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
                 finish();
                 mediaPlayer.stop();
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    notificationManager.cancelAll();
-                }
-                else
-                {
+
                     CreateNotification.createNotification(PlayNhacActivity.this, mangbaihat.get(position),
                             R.drawable.ic_play_arrow_black_24dp, 1, 2);
-                }
+
                 mangbaihat.clear();
 
             }
@@ -632,7 +634,7 @@ public class PlayNhacActivity extends AppCompatActivity implements Playable {
         totaltimesong.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
         seekBar.setMax(mediaPlayer.getDuration());
     }
-    private void UpdateTime(){
+    public void UpdateTime(){
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
