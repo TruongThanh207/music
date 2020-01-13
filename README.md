@@ -10,7 +10,7 @@
   - PHP
 - Cơ sở dữ liệu: MySQL
 
-APK File: [Download](https://drive.google.com/file/d/1PrMJuWcB6ieLTEgEN6xRtO_Y06xTra2w/view?usp=sharing)
+APK File: [Download]https://drive.google.com/file/d/1Yx_BikbM8U9Am6YKq0H0M5OF5SSLrDEb/view?usp=sharing)
 
 Link Dự Phòng: [Link 2](https://www.sieutoc.top/file/d/xLqEnr8ajXfVy8bpDeW2QK/view)
 
